@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.aura.bluetoothphone.R;
 import com.aura.bluetoothphone.bean.ContactsPhoneBean;
+import com.aura.bluetoothphone.utils.ToastUtil;
 
 /**
  * 联系人详情
@@ -22,12 +23,12 @@ import com.aura.bluetoothphone.bean.ContactsPhoneBean;
  * @date 2016年9月28日 下午4:35:17 
  *
  */
-public class ContentsDeteles extends BaseActivity {
-	
+public class ContentsDeteles extends BaseActivity implements OnClickListener{
 	
 	private TextView txt_name ;
 	private TextView txt_phone ;
 	private TextView txt_stop_phone ;
+	private TextView txt_deletes_people ;
 	private String id ;
 	
 	@Override
@@ -37,9 +38,10 @@ public class ContentsDeteles extends BaseActivity {
 
 	@Override
 	protected void findViews() {
-		txt_name		= (TextView)findViewById(R.id.txt_name) ;
-		txt_phone		= (TextView)findViewById(R.id.txt_phone) ;
-		txt_stop_phone	= (TextView)findViewById(R.id.txt_stop_phone) ;
+		txt_name			= (TextView)findViewById(R.id.txt_name) ;
+		txt_phone			= (TextView)findViewById(R.id.txt_phone) ;
+		txt_stop_phone		= (TextView)findViewById(R.id.txt_stop_phone) ;
+		txt_deletes_people  = (TextView)findViewById(R.id.txt_deletes_people) ;
 	}
 
 	@Override
@@ -56,21 +58,37 @@ public class ContentsDeteles extends BaseActivity {
 		});
 	}
 	
-	@Override
+	@Override        
 	protected void widgetListener() {
+		txt_stop_phone.setOnClickListener(this);
+		txt_deletes_people.setOnClickListener(this);
 	}
 	
 	@SuppressWarnings("unused")
 	@Override
 	protected void initGetData() {
 		Bundle bundle = getIntent().getExtras();
-		String position = bundle.getString("position") ;
-		id = position ;
-		List<ContactsPhoneBean> mDataList = (List<ContactsPhoneBean>) bundle.getSerializable("mDataList") ;
-		ContactsPhoneBean bean = mDataList.get(Integer.valueOf(position)) ;
+		if (null != bundle) {
+			String position = bundle.getString("position") ;
+			List<ContactsPhoneBean> mDataList = (List<ContactsPhoneBean>) bundle.getSerializable("mDataList") ;
+			ContactsPhoneBean bean = mDataList.get(Integer.valueOf(position)) ;
+			id = ""+bean.getContactId() ;
+			txt_name.setText(bean.getName());
+			txt_phone.setText(bean.getPhone());
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch(v.getId()){
+		case R.id.txt_deletes_people:		//删除联系人
+			ToastUtil.showToast(ContentsDeteles.this, "此功能未做");
+			break ;
+		case R.id.txt_stop_phone:			//拒接电话
+			ToastUtil.showToast(ContentsDeteles.this, "此功能未做");
+			break ;
+		}
 		
-		txt_name.setText(bean.getName());
-		txt_phone.setText(bean.getPhone());
 	}
 
 	

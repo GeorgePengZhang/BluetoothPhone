@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
             android:contentDescription="@null"
-            android:src="@drawable/other_icon_back"
+            android:src="@drawable/break_bg"
             android:visibility="gone" />
 
         <TextView

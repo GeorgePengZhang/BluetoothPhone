@@ -93,4 +93,27 @@
         style="@style/divider_horizontal_gray_style"
         android:layout_marginLeft="15dp" />
 
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+         android:background="@color/background"
+        android:padding="15dp" >
+
+        <TextView
+            android:id="@+id/txt_deletes_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:singleLine="true"
+            android:text="删除此联系人"
+            android:textColor="@color/red"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal_gray_style"
+        android:layout_marginLeft="15dp" />
+    
 </LinearLayout>

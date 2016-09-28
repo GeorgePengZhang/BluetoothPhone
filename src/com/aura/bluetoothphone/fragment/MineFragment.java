@@ -53,12 +53,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     protected void widgetListener() {
         titleView.setTitle("Personal homepage");
 
-        titleView.setRightImgBtn(R.drawable.icon_setting_normal,new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                IntentUtil.gotoActivity(context,SettingActivity.class);
-            }
-        });
+//        titleView.setRightImgBtn(R.drawable.icon_setting_normal,new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//                IntentUtil.gotoActivity(context,SettingActivity.class);
+//            }
+//        });
         head_imageView.setOnClickListener(this);
         blue_device.setOnClickListener(this);
         blue_help.setOnClickListener(this);

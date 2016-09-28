@@ -178,7 +178,8 @@ public class MyPrivateActivity extends BaseActivity implements
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == REQUEST_ENABLE) {
+		if (requestCode == REQUEST_ENABLE && resultCode == 120) {
+//			cbox_Volumn.setChecked(true);
 			titleView.setProgressBar(true);
 			titleView.setTitle("Are the search...");
 			// 弹出对话框提示用户是后打开
@@ -190,6 +191,8 @@ public class MyPrivateActivity extends BaseActivity implements
 			}
 			// 开始搜索蓝牙设备,搜索到的蓝牙设备通过广播返回
 			adapter.startDiscovery();
+		} else {
+			cbox_Volumn.setChecked(false);
 		}
 
 	}
@@ -217,6 +220,7 @@ public class MyPrivateActivity extends BaseActivity implements
 				intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,
 						30000);
 				startActivityForResult(intent, REQUEST_ENABLE);
+				cbox_Volumn.setChecked(true);
 			} else {
 				cbox_Volumn.setChecked(true);
 			}
@@ -269,6 +273,7 @@ public class MyPrivateActivity extends BaseActivity implements
 			} else if (action
 					.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)) {
 				titleView.setProgressBar(false);
+				
 				titleView.setTitle("BT Setting");
 				mSearchAdapter.notifyDataSetChanged();
 			} else if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
@@ -347,6 +352,10 @@ public class MyPrivateActivity extends BaseActivity implements
 		super.onDestroy();
 		// 解除注册
 		unregisterReceiver(receiver);
+		// 如果正在搜索，就先取消搜索
+		if (adapter.isDiscovering()) {
+			adapter.cancelDiscovery();
+		}
 	}
 
 	@Override
