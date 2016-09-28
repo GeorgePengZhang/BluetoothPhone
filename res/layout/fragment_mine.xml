@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <com.aura.bluetoothphone.view.TitleView
+        android:id="@+id/view_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/relative_parent_title"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/android_main"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center" >
+
+                <com.aura.bluetoothphone.view.CircleImageView
+                    android:id="@+id/xqb_head_imageView"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/main_mine_bg" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_top_adsview_foot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_white_selector"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/background_gray"
+        android:orientation="vertical" >
+
+        <!-- <View style="@style/horizontal_gray_style" /> -->
+        <!--
+         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_white_selector"
+            android:clickable="true"
+        	android:focusable="true"
+            android:padding="15dp" >
+
+               <Button
+                   android:id="@+id/register_btn_code"
+                   style="@style/default_textview_btns"
+                   android:layout_alignParentRight="true"
+                   android:layout_centerVertical="true"
+                   android:layout_marginRight="22dp"
+                   android:layout_centerHorizontal="true"
+                   android:text="立即充值"
+                   android:textColor="@color/white" />
+
+               <TextView
+                   android:id="@+id/edt_end_eta"
+                   style="@style/txt_common16"
+                   android:layout_centerHorizontal="true"
+                   android:layout_centerVertical="true"
+                   android:text="100.00元"
+                   android:textColor="@color/black" />
+
+               <TextView
+                   android:id="@+id/txt_tixain"
+                   style="@style/txt_common16"
+                   android:layout_alignBottom="@+id/edt_end_eta"
+                   android:layout_alignParentLeft="true"
+                   android:minWidth="@dimen/activity_layout_height90"
+                   android:text="可用余额"
+                   />
+        </RelativeLayout>
+        -->
+
+
+        <!--
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           android:background="@drawable/item_white_selector"
+            android:clickable="true"
+        	android:focusable="true"
+            android:padding="15dp" >
+
+            <Button
+                   android:id="@+id/register_btn_codes"
+                   style="@style/default_textview_btns"
+                   android:layout_alignParentRight="true"
+                   android:layout_centerVertical="true"
+                   android:layout_marginRight="22dp"
+                   android:text="立即提现"
+                   android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txt_tixains"
+                style="@style/txt_common16"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:minWidth="@dimen/activity_layout_height90"
+                android:text="可提现金额"
+                />
+
+            <TextView
+                android:id="@+id/txt_tixains_jine"
+                style="@style/txt_common16"
+                android:layout_alignTop="@+id/txt_tixains"
+                android:layout_toLeftOf="@+id/register_btn_codes"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="100.00元"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+        -->
+
+        <View style="@style/horizontal_gray_style" />
+
+        <RelativeLayout
+            android:id="@+id/blue_device"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="@drawable/item_white_selector" >
+
+            <TextView
+                android:id="@+id/txt_mingxi"
+                style="@style/txt_common16"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:minWidth="@dimen/activity_layout_height90"
+                android:drawableLeft="@drawable/device_management_true"
+                android:gravity="center"
+                android:drawablePadding="15dp"
+                android:text="Device Setting" />
+
+            <ImageView
+                style="@style/img_set_go"
+                android:contentDescription="@null" />
+        </RelativeLayout>
+
+        <View
+            style="@style/divider_horizontal_gray_style"
+            android:layout_marginLeft="15dp" />
+
+        <RelativeLayout
+            android:id="@+id/bule_help"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+             android:background="@drawable/item_white_selector" >
+
+            <TextView
+                style="@style/txt_common16"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:minWidth="@dimen/activity_layout_height90"
+                android:gravity="center"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/help"
+                android:text="Help" />
+
+            <ImageView
+                style="@style/img_set_go"
+                android:contentDescription="@null" />
+        </RelativeLayout>
+
+        <View
+            style="@style/divider_horizontal_gray_style"
+            android:layout_marginLeft="15dp" />
+
+        <RelativeLayout
+            android:id="@+id/blue_about"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="@drawable/item_white_selector" >
+
+            <TextView
+                android:id="@+id/txt_tongzhi"
+                style="@style/txt_common16"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:minWidth="@dimen/activity_layout_height90"
+                android:gravity="center"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/about"
+                android:text="About" />
+
+            <ImageView
+                android:id="@+id/img_contract_go"
+                style="@style/img_set_go"
+                android:contentDescription="@null" />
+
+            <ImageView
+                android:id="@+id/edt_end_xiao"
+                style="@style/txt_common17"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/img_contract_go"
+                android:minWidth="30dp"
+                android:src="@drawable/bar_dot"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <View
+            style="@style/divider_horizontal_gray_style"
+            android:layout_marginLeft="15dp" />
+                <View
+            style="@style/divider_horizontal_gray_style"
+            android:layout_marginTop="20dp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/exit_layout"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="@drawable/item_white_selector"
+            android:gravity="center"
+             >
+
+            <TextView
+                android:id="@+id/txt_exit"
+                style="@style/txt_common16"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:minWidth="@dimen/activity_layout_height90"
+                android:textColor="@color/red"
+                android:text="Log out" />
+        </RelativeLayout>
+
+        <View style="@style/horizontal_gray_style" />
+    </LinearLayout>
+
+</LinearLayout>

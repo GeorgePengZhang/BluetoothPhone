@@ -1,0 +1,106 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:background="@color/bg_default" >
+
+    <com.aura.bluetoothphone.view.TitleView
+        android:id="@+id/view_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_title" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/setting_relative_volume"
+                    style="@style/item_single_white_style"
+                    android:padding="5dp" >
+
+                    <TextView
+                        style="@style/txt_setting_style"
+                        android:layout_marginLeft="10dp"
+                        android:text="BT Switch" />
+
+                    <CheckBox
+                        android:id="@+id/setting_cbox_volume"
+                        style="@style/cbox_switch_style"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+
+
+                <View style="@style/horizontal_gray_style" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+<LinearLayout
+    android:id="@+id/view1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/view"
+    android:orientation="vertical" >
+        <com.aura.bluetoothphone.view.AutoSizeListView  
+        android:id="@+id/lv"  
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:visibility="gone"
+         >  
+   	 </com.aura.bluetoothphone.view.AutoSizeListView> 
+	  <TextView
+        android:id="@+id/tv_bonded_devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#CCCCCC"
+        android:padding="5dp"
+        android:gravity="center"
+        android:text="已配对设备"
+        android:textSize="16sp" />
+
+    <ListView
+        android:id="@+id/list_bonded_devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:scrollbars="none" />
+
+    <TextView
+        android:id="@+id/tv_search_devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#CCCCCC"
+        android:padding="5dp"
+        android:gravity="center"
+        android:text="搜索到的设备"
+        android:textSize="16sp" />
+
+    <ListView
+        android:id="@+id/list_search_devices"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:scrollbars="none" />
+	    
+	</LinearLayout>
+</RelativeLayout>

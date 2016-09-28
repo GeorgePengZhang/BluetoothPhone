@@ -1,0 +1,56 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_layout_height250">250dp</dimen>
+    <dimen name="activity_layout_height115">115dp</dimen>
+    <dimen name="activity_layout_height105">105dp</dimen>
+    <dimen name="activity_layout_height90">90dp</dimen>
+    <dimen name="header_height">60dp</dimen>
+    <dimen name="activity_layout_height40">40dp</dimen>
+    <dimen name="activity_layout_height38">38dp</dimen>
+    <dimen name="activity_layout_height30">30dp</dimen>
+    <dimen name="activity_layout_height">20dp</dimen>
+    <dimen name="activity_layout_height26">26dp</dimen>
+    <dimen name="activity_vertical_margin15">15dp</dimen>
+    <dimen name="activity_vertical_margin_top">10dp</dimen>
+    <dimen name="activity_vertical_margin_left">5dp</dimen>
+    <dimen name="activity_vertical_margin3">3dp</dimen>
+    <!-- 公共. -->
+    <!-- 普通条目的水平方向的margin -->
+    <dimen name="item_margin_hor">15dp</dimen>
+    <dimen name="item_margin_hors">19dp</dimen>
+    <!-- ****************全局统一字体大小 ************ -->
+    <!-- 全局统一超大大号字体 -->
+    <dimen name="font_size_big_plus">20sp</dimen>
+    <!-- 全局统一大号字体 -->
+    <dimen name="font_size_big">18sp</dimen>
+    <!-- 全局统一中号字体 -->
+    <dimen name="font_size_middle">16sp</dimen>
+    <!-- 全局统一正文号字体 -->
+    <dimen name="font_size_normal">14sp</dimen>
+    <!-- 全局统一小号字体 -->
+    <dimen name="font_size_little">12sp</dimen>
+    <dimen name="font_size_normasl">13sp</dimen>
+    <!-- 全局统一最小号字体 -->
+    <dimen name="font_size_least">15sp</dimen>
+    <!-- checkbox宽度  解决note2 设置宽度为wrap_content 右边显示不全问题 -->
+    <dimen name="checkbox_width">65dp</dimen>
+    <dimen name="layout_width">52dp</dimen>
+    <dimen name="layout_height">22dp</dimen>
+    <!-- 完善资料的EditText高度 -->
+    <dimen name="edit_height">48dp</dimen>
+    <dimen name="radio_button_conner_radius">5dp</dimen>
+    <dimen name="radio_button_stroke_border">1dp</dimen>
+
+    <dimen name="base_item_height">40dp</dimen>
+    <dimen name="radius">5dp</dimen>
+    <dimen name="radiusa">0dp</dimen>
+    <dimen name="line_view">0.5dp</dimen>
+    <dimen name="PaddingLarge">10dip</dimen>
+    <dimen name="PaddingXLarge">15dip</dimen>
+    <dimen name="PaddingXXLarge">20dip</dimen>
+    <dimen name="PaddingXMedium">8dip</dimen>
+
+</resources>

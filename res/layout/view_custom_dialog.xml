@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:padding="10dp" >
+
+    <LinearLayout
+        android:id="@+id/custom_dialog_view_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_bg_wihte"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:id="@+id/custom_dialog_view_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-10dp"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/custom_dialog_txt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/app_name"
+                android:textColor="@color/font_content"
+                android:textSize="@dimen/font_size_big" />
+
+            <View
+                style="@style/divider_horizontal_gray_style"
+                android:layout_height="1dp"
+                android:layout_margin="3dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp" >
+
+                    <TextView
+                        android:id="@+id/custom_dialog_txt_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:lineSpacingExtra="3dp"
+                        android:minHeight="60dp"
+                        android:padding="8dp"
+                        android:text=""
+                        android:textColor="@color/font_content"
+                        android:textSize="15sp"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/custom_dialog_edit_input"
+                        style="@style/edit_default_style"
+                        android:gravity="center_vertical|left"
+                        android:hint="@null"
+                        android:inputType="textPassword"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/custom_dialog_view_custom"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/dialog_bg_wihte"
+                android:orientation="vertical"
+                android:visibility="gone" />
+
+            <ListView
+                android:id="@+id/custom_dialog_view_listview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/dialog_bg_wihte"
+                android:cacheColorHint="@color/transparent"
+                android:divider="@color/divider_gray"
+                android:dividerHeight="0.5dp"
+                android:listSelector="@color/transparent"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/custom_dialog_view_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <Button
+                    android:id="@+id/custom_dialog_btn_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/dialog_btn_right_bg_selector"
+                    android:text="@string/enter"
+                    android:textColor="@color/font_white"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/custom_dialog_btn_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/dialog_btn_left_bg_selector"
+                    android:text="@string/cancel"
+                    android:textColor="@color/font_white"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/custom_dialog_btn_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/dialog_btn_right_bg_selector"
+                    android:text="@string/enter"
+                    android:textColor="@color/font_white"
+                    android:visibility="gone" />
+                   <!-- 以前的样式 android:background="@drawable/dialog_btn_single_bg_selector" -->
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/custom_dialog_view_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_progress_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone" >
+
+        <!--
+             <com.utoow.diver.view.CustomProgressBar
+            xmlns:custom="http://schemas.android.com/apk/res/com.utoow.bydfans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progress_red_bg_selector"
+            custom:animtime="1000" />
+        -->
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:indeterminateDrawable="@drawable/progress_blue_bg_selector" />
+
+        <TextView
+            android:id="@+id/custom_dialog_txt_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/font_white"
+            android:textSize="@dimen/font_size_middle" />
+    </LinearLayout>
+
+</RelativeLayout>

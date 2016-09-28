@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:title="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/iddd"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" >
+    </FrameLayout>
+
+    <View style="@style/line_view" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:orientation="horizontal" > 
+ 
+        <com.aura.bluetoothphone.view.MyRadioView
+            android:id="@+id/main_radio_contacts"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            title:img0="@drawable/conversation_false"
+            title:img1="@drawable/conversation_true"
+            title:text="Contacts" />
+        <com.aura.bluetoothphone.view.MyRadioView
+            android:id="@+id/main_radio_keyboard"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            title:img0="@drawable/keyboard_normal"
+            title:img1="@drawable/keyboard_up"
+            title:text="Keyboard" />
+
+        <com.aura.bluetoothphone.view.MyRadioView
+            android:id="@+id/main_radio_conversation"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            title:img0="@drawable/contacts_false"
+            title:img1="@drawable/contacts_true"
+            title:text="Conversation" />
+        <com.aura.bluetoothphone.view.MyRadioView
+            android:id="@+id/main_radio_me"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            title:img0="@drawable/me_false"
+            title:img1="@drawable/me_true"
+            title:text="Me" />
+    </LinearLayout>
+</LinearLayout>

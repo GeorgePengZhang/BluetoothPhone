@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <com.aura.bluetoothphone.view.TitleView
+    android:id="@+id/view_title"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" />
+    <com.aura.bluetoothphone.view.connect.ClearEditText
+        android:id="@+id/id_edit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x5"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginRight="@dimen/x5"
+        android:layout_marginTop="@dimen/x5"
+        android:background="@drawable/contacts_search_bg"
+        android:drawableLeft="@drawable/contacts_search_icon"
+        android:gravity="center"
+        android:hint="@string/search"
+        android:singleLine="true"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ListView
+            android:id="@+id/id_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="36dp"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none" >
+        </ListView>
+
+        <com.aura.bluetoothphone.view.connect.SideBar
+            android:id="@+id/id_sidebar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/id_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="?android:attr/textColorSecondary" />
+    </FrameLayout>
+
+</LinearLayout>
