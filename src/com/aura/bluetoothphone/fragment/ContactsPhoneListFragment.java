@@ -200,7 +200,6 @@ public class ContactsPhoneListFragment extends BaseFragment implements OnTouchin
 					}
 					Collections.sort(mDataList);
 				}
-				
 				cursor.close();
 				updateListAdapter(mDataList);
 			}
@@ -281,16 +280,16 @@ public class ContactsPhoneListFragment extends BaseFragment implements OnTouchin
 	 * @param keyword 
 	 * @return 
 	 */  
-	public static String matcherSearchTitle(String title,String keyword){  
+	public static String matcherSearchTitle(String title,String keyword){
 	    String content = title;    
 	    String wordReg = "(?i)"+keyword;//用(?i)来忽略大小写    
 	    StringBuffer sb = new StringBuffer();    
 	    Matcher matcher = Pattern.compile(wordReg).matcher(content);    
-	    while(matcher.find()){    
+	    while(matcher.find()){
 	        //这样保证了原文的大小写没有发生变化    
 	        matcher.appendReplacement(sb, "<font color=#33B5E5>"+matcher.group()+"</font>");  
-	    }    
-	    matcher.appendTail(sb);    
+	    }
+	    matcher.appendTail(sb);
 	    content = sb.toString();   
 	    return content;  
 	}

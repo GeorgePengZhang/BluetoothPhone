@@ -28,7 +28,10 @@ import android.widget.Toast;
 import com.aura.bluetoothphone.R;
 import com.aura.bluetoothphone.adapter.MyListAdapter;
 import com.aura.bluetoothphone.interf.RighClickListener;
+import com.aura.bluetoothphone.utils.DialogUtil;
+import com.aura.bluetoothphone.utils.LogUtil;
 import com.aura.bluetoothphone.utils.ToastUtil;
+import com.aura.bluetoothphone.widget.CustomDialog;
 
 /**
  * 蓝牙设备 配置管理界面
@@ -76,36 +79,62 @@ public class MyPrivateActivity extends BaseActivity implements
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Toast.makeText(MyPrivateActivity.this, "已经配对",
-						Toast.LENGTH_SHORT).show();
-				try {
-					// 连接
-					// connect(device);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				final int prot = position;
+				DialogUtil.showMessageDg(MyPrivateActivity.this,
+						getString(R.string.prompt),
+						getString(R.string.auth_process_no_blue),
+						new CustomDialog.OnClickListener() {
+							@Override
+							public void onClick(CustomDialog dialog, int id,
+									Object object) {
+								BluetoothDevice device = bondedDevicesList.get(prot) ;
+								unpairDevice(device) ;
+								dialog.dismiss();
+							}
+						});
+				//				try {
+				//					// 连接
+				//					// connect(device);
+				//				} catch (Exception e) {
+				//					e.printStackTrace();
+				//				}
 			}
 		});
 
-		// 为陪对的设备 点击事件
+		// 为配对的设备 点击事件
 		list_search_devices.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				BluetoothDevice device = searchDevicesList.get(position);
-				if (null == device.getName() || "".equals(device.getName())) {
-					ToastUtil.showToast(MyPrivateActivity.this, "配对取消！");
-				} else {
-					try {
-						// 配对
-						Method createBondMethod = BluetoothDevice.class
-								.getMethod("createBond");
-						createBondMethod.invoke(device);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
+				final int prot = position;
+				DialogUtil.showMessageDg(MyPrivateActivity.this,
+						getString(R.string.prompt),
+						getString(R.string.auth_process_blue),
+						new CustomDialog.OnClickListener() {
+							@Override
+							public void onClick(CustomDialog dialog, int id,
+									Object object) {
+								BluetoothDevice device = searchDevicesList
+										.get(prot);
+								if (null == device.getName()
+										|| "".equals(device.getName())) {
+									ToastUtil.showToast(MyPrivateActivity.this,
+											"配对取消！");
+								} else {
+									try {
+										// 配对
+										Method createBondMethod = BluetoothDevice.class
+												.getMethod("createBond");
+										createBondMethod.invoke(device);
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+								dialog.dismiss();
+							}
+						});
+
 			}
 		});
 
@@ -141,6 +170,19 @@ public class MyPrivateActivity extends BaseActivity implements
 						}
 					}
 				});
+	}
+
+	private void unpairDevice(BluetoothDevice device) {
+		try {
+			Method m = device.getClass()
+					.getMethod("removeBond", (Class[]) null);
+			m.invoke(device, (Object[]) null);
+		} catch (Exception e) {
+			LogUtil.out("TAG:"+e.getMessage());
+
+		}
+		getBondedDevices();
+		mBondedAdapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -179,7 +221,7 @@ public class MyPrivateActivity extends BaseActivity implements
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == REQUEST_ENABLE && resultCode == 120) {
-//			cbox_Volumn.setChecked(true);
+			// cbox_Volumn.setChecked(true);
 			titleView.setProgressBar(true);
 			titleView.setTitle("Are the search...");
 			// 弹出对话框提示用户是后打开
@@ -235,7 +277,7 @@ public class MyPrivateActivity extends BaseActivity implements
 		Set<BluetoothDevice> devices = adapter.getBondedDevices();
 		bondedDevicesList.addAll(devices);
 		// 为listview动态设置高度（有多少条目就显示多少条目）
-		setListViewHeight(bondedDevicesList.size());
+		setListViewHeight(bondedDevicesList.size()); 
 		mBondedAdapter.notifyDataSetChanged();
 		// 弹出对话框提示用户是后打开
 		searchDevicesList.clear();
@@ -244,7 +286,7 @@ public class MyPrivateActivity extends BaseActivity implements
 		if (!adapter.isDiscovering()) {
 			adapter.cancelDiscovery();
 		}
-		// 开始搜索蓝牙设备,搜索到的蓝牙设备通过广播返回
+		// 开始搜索蓝牙设备,搜索到的蓝牙设备通过广播返回	
 		adapter.startDiscovery();
 
 	}
@@ -269,11 +311,11 @@ public class MyPrivateActivity extends BaseActivity implements
 					// device.getAddress()+"）");
 					mSearchAdapter.notifyDataSetChanged();
 				}
-				// 搜索完成
+				// 搜索完成 
 			} else if (action
 					.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)) {
 				titleView.setProgressBar(false);
-				
+
 				titleView.setTitle("BT Setting");
 				mSearchAdapter.notifyDataSetChanged();
 			} else if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
@@ -284,20 +326,14 @@ public class MyPrivateActivity extends BaseActivity implements
 				if (device.getName().equalsIgnoreCase(name)) {
 					int connectState = device.getBondState();
 					switch (connectState) {
-					case BluetoothDevice.BOND_NONE: // 10
-						Toast.makeText(MyPrivateActivity.this,
-								"取消配对：" + device.getName(), Toast.LENGTH_SHORT)
-								.show();
+					case BluetoothDevice.BOND_NONE: 					// 10
+						ToastUtil.showToast(MyPrivateActivity.this, "取消配对：" + device.getName());
 						break;
-					case BluetoothDevice.BOND_BONDING: // 11
-						Toast.makeText(MyPrivateActivity.this,
-								"正在配对：" + device.getName(), Toast.LENGTH_SHORT)
-								.show();
+					case BluetoothDevice.BOND_BONDING: 					// 11
+						ToastUtil.showToast(MyPrivateActivity.this, "取消配对：" + device.getName());
 						break;
-					case BluetoothDevice.BOND_BONDED: // 12
-						Toast.makeText(MyPrivateActivity.this,
-								"完成配对：" + device.getName(), Toast.LENGTH_SHORT)
-								.show();
+					case BluetoothDevice.BOND_BONDED: 					// 12
+						ToastUtil.showToast(MyPrivateActivity.this, "完成配对：" + device.getName());
 						getBondedDevices();
 						try {
 							// 连接

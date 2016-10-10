@@ -39,6 +39,12 @@ public class MyListAdapter extends BaseAdapter {
 	}
 
 	@Override
+	public void notifyDataSetChanged() {
+		
+		
+		super.notifyDataSetChanged();
+	}
+	@Override
 	public Object getItem(int position) {
 		return mDevices.get(position);
 	}

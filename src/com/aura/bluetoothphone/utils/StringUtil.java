@@ -9,6 +9,7 @@ import java.util.Date;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.widget.EditText;
 
@@ -26,6 +27,27 @@ import com.aura.bluetoothphone.configs.TApplication;
  * 
  */
 public class StringUtil {
+	
+
+	/** 系统版本 //4.4.2 */
+	public static final int VERSION_CODES_KITKAT = 19;
+	
+	/** 应用根目录 */
+	public static final String PATH_BASE = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Aura_sll/";
+	/** 拍照文件夹 */
+	public static final String PATH_CAMERA = PATH_BASE + "Camera/";
+	/** 拍照缓存文件 */
+	public static final String PATH_IMAGE_TEMP = PATH_CAMERA + "temp.jpg";
+	/** 裁剪图片请求码 */
+	public static final int REQUEST_CODE_CROP_ICON = 12;
+	
+	// *****************************请求码 ******************************//
+	/** 拍照获取图片请求码 */
+	public static final int REQUEST_CODE_SELECT_PHOTOGRAPH = 10;
+	/** 从本地获取图片请求码 */
+	public static final int REQUEST_CODE_SELECT_LOCAL = 11;
+	
+	
 
 	/**
 	 * 转换成千进制.

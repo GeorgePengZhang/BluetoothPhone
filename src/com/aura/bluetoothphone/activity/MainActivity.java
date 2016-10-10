@@ -3,6 +3,7 @@ package com.aura.bluetoothphone.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
@@ -179,6 +180,12 @@ public class MainActivity extends BaseFragmentActivity {
 			return true;
 		}
 		return super.dispatchKeyEvent(event);
+	}
+	
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(arg0, arg1, arg2);
 	}
 
 }

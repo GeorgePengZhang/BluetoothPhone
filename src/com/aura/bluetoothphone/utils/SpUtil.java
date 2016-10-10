@@ -6,11 +6,25 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.util.ResourceBundle.Control;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.NinePatchDrawable;
 import android.text.TextUtils;
+import android.util.Base64;
+import android.widget.ImageView;
 
+import com.aura.bluetoothphone.R;
 import com.aura.bluetoothphone.configs.TApplication;
 
 
@@ -25,6 +39,7 @@ public class SpUtil {
 
 	private static SpUtil spUtil;
 	private static SharedPreferences sp;
+	public static String SHARED_PREFERENCES_NAME = "Image" ; 
 
 	/**
 	 * 获取一个操作sp数据的实例
@@ -397,5 +412,68 @@ public class SpUtil {
 		SharedPreferences sharedPreferences = context.getSharedPreferences(FileKey, mode);
 		return sharedPreferences.getFloat(valueKey, value);
 	}
-
+	
+	/**
+	 * 保存头像
+	 * 
+	 * @author Robin
+	 * @Title: saveDrawable 
+	 * @Description: TODO
+	 * @param @param context
+	 * @param @param bitmap    设定文件 
+	 * @return void    返回类型 
+	 * @throws 
+	 * @date 2016年10月9日 下午3:05:57
+	 */
+	public static void saveDrawable(Context context, Bitmap bitmap)  
+    {  
+		SharedPreferences  mSharedPreferences = context.getSharedPreferences("ThumbLock", Activity.MODE_PRIVATE);  
+		SharedPreferences.Editor editor = mSharedPreferences.edit();     
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+        bitmap.compress(CompressFormat.JPEG, 50, baos);  
+        String imageBase64 = new String(Base64.encodeToString(baos.toByteArray(),Base64.DEFAULT));  
+        editor.putString("P",imageBase64 );  
+        editor.commit();  
+    }  
+      
+	/**
+	 * 获取头像
+	 * 
+	 * @author Robin
+	 * @Title: loadDrawable 
+	 * @Description: TODO
+	 * @param @param context
+	 * @param @return    设定文件 
+	 * @return Bitmap    返回类型 
+	 * @throws 
+	 * @date 2016年10月9日 下午3:06:12
+	 */
+    public static Bitmap loadDrawable(Context context)  
+    {  
+    	SharedPreferences  mSharedPreferences = context.getSharedPreferences("ThumbLock", Activity.MODE_PRIVATE);  
+		SharedPreferences.Editor editor = mSharedPreferences.edit();   
+        String temp = mSharedPreferences.getString("P", "");  
+        ByteArrayInputStream bais = new ByteArrayInputStream(Base64.decode(temp.getBytes(), Base64.DEFAULT));  
+        return drawable2Bitmap(Drawable.createFromStream(bais, ""));  
+    }  
+    
+    public static Bitmap drawable2Bitmap(Drawable drawable) {  
+        if (drawable instanceof BitmapDrawable) {  
+            return ((BitmapDrawable) drawable).getBitmap();  
+        } else if (drawable instanceof NinePatchDrawable) {  
+            Bitmap bitmap = Bitmap  
+                    .createBitmap(  
+                            drawable.getIntrinsicWidth(),  
+                            drawable.getIntrinsicHeight(),  
+                            drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888  
+                                    : Bitmap.Config.RGB_565);  
+            Canvas canvas = new Canvas(bitmap);  
+            drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),  
+                    drawable.getIntrinsicHeight());  
+            drawable.draw(canvas);  
+            return bitmap;  
+        } else {  
+            return null;  
+        }  
+    }  
 }
