@@ -7,5 +7,9 @@
         <item>从相册中选取</item>
     </string-array>
 
-
+    <!-- 蓝牙操作-->
+    <string-array name="select_blue">
+        <item>取消配对</item>
+        <item>连接蓝牙操作</item>
+    </string-array>
 </resources>

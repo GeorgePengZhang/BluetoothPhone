@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:background="@color/bg_default" >
+
+    <com.aura.bluetoothphone.view.TitleView
+        android:id="@+id/view_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_title" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/setting_relative_volume"
+                    style="@style/item_single_white_style"
+                    android:padding="5dp" >
+
+                    <TextView
+                        style="@style/txt_setting_style"
+                        android:layout_marginLeft="10dp"
+                        android:text="震动" />
+
+                    <CheckBox
+                        android:id="@+id/setting_cbox_volume"
+                        style="@style/cbox_switch_style"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+
+
+                <View style="@style/horizontal_gray_style"
+					android:layout_height="10dp"                    
+                     />
+
+                <TextView
+                    android:id="@+id/setting_btn_clearchat"
+                    style="@style/item_single_white_style"
+                    android:text="关于我们"
+                    android:visibility="gone" />
+
+                <!--  <View style="@style/divider_gray_horizontal_style" /> -->
+
+                <RelativeLayout
+                    android:id="@+id/setting_btn_sound"
+                    style="@style/item_single_white_style" 
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableRight="@drawable/arrow_right_diver_shop"
+                        android:text="来电铃声"
+                        android:textColor="@color/font_black"
+                        android:textSize="@dimen/font_size_middle" />
+
+                    <TextView
+                        android:id="@+id/setting_txt_sound_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="25dp"
+                        android:background="@null"
+                        android:drawableRight="@null"
+                        android:text="哇哈哈"
+                        android:textColor="@color/font_gray" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/setting_btn_about"
+                style="@style/item_single_white_style"
+                android:layout_marginTop="15dp"
+                android:visibility="gone"
+                android:text="关于我们" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

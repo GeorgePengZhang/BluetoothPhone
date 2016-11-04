@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="photoPickerNotFoundText">手机中无可用的图片</string>
-    <string name="app_name">BluetoothPhone</string>
+    <string name="app_name">sll_android</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="back">返回</string>
@@ -65,5 +65,6 @@
     <string name="auth_process_login_wait">正在获取授权，请稍候&#8230;</string>    
     <string name="auth_process_blue">确定打开蓝牙吗？;</string>     
     <string name="auth_process_no_blue">确定取消蓝牙配对吗？</string>     
+    <string name="dialog_select_blue">蓝牙操作</string>
         
 </resources>

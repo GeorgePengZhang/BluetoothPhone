@@ -2,11 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
     android:orientation="vertical" >
+
     <com.aura.bluetoothphone.view.TitleView
-    android:id="@+id/view_title"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" />
+        android:id="@+id/view_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
     <com.aura.bluetoothphone.view.connect.ClearEditText
         android:id="@+id/id_edit"
         android:layout_width="fill_parent"
@@ -31,10 +35,10 @@
             android:id="@+id/id_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="10dp"
-            android:paddingRight="36dp"
             android:divider="@null"
             android:listSelector="@android:color/transparent"
+            android:paddingLeft="10dp"
+            android:paddingRight="36dp"
             android:scrollbars="none" >
         </ListView>
 
