@@ -1,5 +1,6 @@
 package com.aura.bluetoothphone.utils;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,53 +8,57 @@ import java.util.Calendar;
 import java.util.Date;
 
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaRecorder;
+import android.media.MediaRecorder.AudioEncoder;
+import android.media.MediaRecorder.AudioSource;
+import android.media.MediaRecorder.OutputFormat;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 
 import com.aura.bluetoothphone.R;
 import com.aura.bluetoothphone.configs.FileConfig;
 import com.aura.bluetoothphone.configs.TApplication;
 
-
 /**
  * 字符串操作工具类
  * 
- * @author 罗文忠
+ * @author
  * @version 1.0
  * @date 2013-7-27
  * 
  */
 public class StringUtil {
-	
 
 	/** 系统版本 //4.4.2 */
 	public static final int VERSION_CODES_KITKAT = 19;
-	
+
 	/** 应用根目录 */
-	public static final String PATH_BASE = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Aura_sll/";
+	public static final String PATH_BASE = Environment
+			.getExternalStorageDirectory().getAbsolutePath() + "/Aura_sll/";
 	/** 拍照文件夹 */
 	public static final String PATH_CAMERA = PATH_BASE + "Camera/";
 	/** 拍照缓存文件 */
 	public static final String PATH_IMAGE_TEMP = PATH_CAMERA + "temp.jpg";
 	/** 裁剪图片请求码 */
 	public static final int REQUEST_CODE_CROP_ICON = 12;
-	
+
 	// *****************************请求码 ******************************//
 	/** 拍照获取图片请求码 */
 	public static final int REQUEST_CODE_SELECT_PHOTOGRAPH = 10;
 	/** 从本地获取图片请求码 */
 	public static final int REQUEST_CODE_SELECT_LOCAL = 11;
-	
-	
 
 	/**
 	 * 转换成千进制.
 	 * 
 	 * @param number
-	 *                原数.
+	 *            原数.
 	 * @return
 	 * @version 1.0
 	 * @createTime 2014年1月20日,下午5:44:05
@@ -71,7 +76,7 @@ public class StringUtil {
 	 * 转换成千进制.
 	 * 
 	 * @param number
-	 *                原数.
+	 *            原数.
 	 * @return
 	 * @version 1.0
 	 * @createTime 2014年1月20日,下午5:44:05
@@ -96,9 +101,9 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param text
-	 *                需要处理的文本
+	 *            需要处理的文本
 	 * @param color
-	 *                文本颜色 rgb #ffffff
+	 *            文本颜色 rgb #ffffff
 	 * @return 处理后的html格式文本
 	 */
 	public static String makeColorText(String text, String color) {
@@ -117,7 +122,7 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param text
-	 *                需要处理的文本
+	 *            需要处理的文本
 	 * @return 处理后的html格式文本
 	 */
 	public static String makeBigText(String text, int size) {
@@ -141,9 +146,9 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param text
-	 *                需要处理的文本
+	 *            需要处理的文本
 	 * @param color
-	 *                文本颜色 rgb #ffffff
+	 *            文本颜色 rgb #ffffff
 	 * @return 处理后的html格式文本
 	 */
 	public static String makeBigColorText(String text, String color) {
@@ -155,7 +160,7 @@ public class StringUtil {
 	 * 根据网络图片路径,获取本地图片路径.
 	 * 
 	 * @param netPath
-	 *                网络图片路径
+	 *            网络图片路径
 	 * @author 刘艺谋
 	 * @version 1.0, 2013-4-5
 	 */
@@ -163,7 +168,8 @@ public class StringUtil {
 		if (TextUtils.isEmpty(netPath)) {
 			return "";
 		}
-		return FileConfig.PATH_IMAGES + netPath.substring(netPath.lastIndexOf("/") + 1);
+		return FileConfig.PATH_IMAGES
+				+ netPath.substring(netPath.lastIndexOf("/") + 1);
 	}
 
 	/**
@@ -183,7 +189,8 @@ public class StringUtil {
 		if (TextUtils.isEmpty(netPath)) {
 			return "";
 		}
-		return FileConfig.PATH_USER_IMAGE + netPath.substring(netPath.lastIndexOf("/") + 1);
+		return FileConfig.PATH_USER_IMAGE
+				+ netPath.substring(netPath.lastIndexOf("/") + 1);
 	}
 
 	/**
@@ -197,9 +204,9 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param parent
-	 *                父文件夹
+	 *            父文件夹
 	 * @param netPath
-	 *                图片网络路径
+	 *            图片网络路径
 	 * @return 本地文件存储绝对路径
 	 */
 	public static String getUserLocalImagePath(String parent, String netPath) {
@@ -226,7 +233,8 @@ public class StringUtil {
 		if (TextUtils.isEmpty(netPath)) {
 			return "";
 		}
-		return FileConfig.PATH_USER_THUMBNAIL + netPath.substring(netPath.lastIndexOf("/") + 1);
+		return FileConfig.PATH_USER_THUMBNAIL
+				+ netPath.substring(netPath.lastIndexOf("/") + 1);
 	}
 
 	/**
@@ -240,20 +248,22 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param netPath
-	 *                网络文件路径
+	 *            网络文件路径
 	 * @param localParentPath
-	 *                本地文件缓存目录
+	 *            本地文件缓存目录
 	 * @return 本地缓存文件的绝对路径
 	 */
-	public static String getLocalCachePath(String netPath, String localParentPath) {
-		return localParentPath + netPath.substring(netPath.lastIndexOf("/") + 1);
+	public static String getLocalCachePath(String netPath,
+			String localParentPath) {
+		return localParentPath
+				+ netPath.substring(netPath.lastIndexOf("/") + 1);
 	}
 
 	/**
 	 * 判断参数.
 	 * 
 	 * @param params
-	 *                需要判断的字符串.
+	 *            需要判断的字符串.
 	 * @return 若为空则返回空字符串,否则返回原字符串.
 	 * @version 1.0
 	 * @createTime 2013年11月1日,下午12:01:50
@@ -274,7 +284,7 @@ public class StringUtil {
 	 * 判断参数.
 	 * 
 	 * @param params
-	 *                需要判断的字符串.
+	 *            需要判断的字符串.
 	 * @return 若为空则返回0字符串,否则返回原字符串.
 	 * @version 1.0
 	 * @createTime 2013年11月1日,下午12:01:50
@@ -313,10 +323,12 @@ public class StringUtil {
 		} else if (size >= 1024 * 1024 && size < 1024 * 1024 * 1024) {
 			size /= (1024 * 1024);
 			format.applyPattern("###,###,##0.00MB");
-		} else if (size >= 1024 * 1024 * 1024 && size < 1024 * 1024 * 1024 * 1024) {
+		} else if (size >= 1024 * 1024 * 1024
+				&& size < 1024 * 1024 * 1024 * 1024) {
 			size /= (1024 * 1024 * 1024);
 			format.applyPattern("###,###,##0.00GB");
-		} else if (size >= 1024 * 1024 * 1024 * 1024 && size < 1024 * 1024 * 1024 * 1024 * 1024) {
+		} else if (size >= 1024 * 1024 * 1024 * 1024
+				&& size < 1024 * 1024 * 1024 * 1024 * 1024) {
 			size /= (1024 * 1024 * 1024 * 1024);
 			format.applyPattern("###,###,##0.00GB");
 		}
@@ -334,7 +346,7 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param time
-	 *                原始时间(yyyy-MM-dd hh:mm:ss)
+	 *            原始时间(yyyy-MM-dd hh:mm:ss)
 	 * @return 处理后的时间
 	 */
 	public static String caculateTime(String time) {
@@ -350,16 +362,21 @@ public class StringUtil {
 			if (caculTime < 1) {
 				newTime = 1 + TApplication.context.getString(R.string.second);
 			} else if (caculTime < 60 && caculTime >= 1) { // 秒
-				newTime = caculTime + TApplication.context.getString(R.string.second);
+				newTime = caculTime
+						+ TApplication.context.getString(R.string.second);
 			} else if (caculTime >= 60 && caculTime < 60 * 60) { // 分
 				caculTime /= 60;
-				newTime = caculTime + TApplication.context.getString(R.string.minute);
+				newTime = caculTime
+						+ TApplication.context.getString(R.string.minute);
 			} else if (caculTime >= 60 * 60 && caculTime < 60 * 60 * 24) { // 时
 				caculTime /= 60 * 60;
-				newTime = caculTime + TApplication.context.getString(R.string.hour);
-			} else if (caculTime >= 60 * 60 * 24 && caculTime < 60 * 60 * 24 * 4) { // 天
+				newTime = caculTime
+						+ TApplication.context.getString(R.string.hour);
+			} else if (caculTime >= 60 * 60 * 24
+					&& caculTime < 60 * 60 * 24 * 4) { // 天
 				caculTime /= 60 * 60 * 24;
-				newTime = caculTime + TApplication.context.getString(R.string.day);
+				newTime = caculTime
+						+ TApplication.context.getString(R.string.day);
 			} else {
 				SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm");
 				newTime = df.format(date);
@@ -384,7 +401,7 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param time
-	 *                原始时间(yyyy-MM-dd hh:mm:ss)
+	 *            原始时间(yyyy-MM-dd hh:mm:ss)
 	 * @return 处理后的时间
 	 */
 	public static String caculateData(String time) {
@@ -400,16 +417,21 @@ public class StringUtil {
 			if (caculTime < 1) {
 				newTime = 1 + TApplication.context.getString(R.string.second);
 			} else if (caculTime < 60 && caculTime >= 1) { // 秒
-				newTime = caculTime + TApplication.context.getString(R.string.second);
+				newTime = caculTime
+						+ TApplication.context.getString(R.string.second);
 			} else if (caculTime >= 60 && caculTime < 60 * 60) { // 分
 				caculTime /= 60;
-				newTime = caculTime + TApplication.context.getString(R.string.minute);
+				newTime = caculTime
+						+ TApplication.context.getString(R.string.minute);
 			} else if (caculTime >= 60 * 60 && caculTime < 60 * 60 * 24) { // 时
 				caculTime /= 60 * 60;
-				newTime = caculTime + TApplication.context.getString(R.string.hour);
-			} else if (caculTime >= 60 * 60 * 24 && caculTime < 60 * 60 * 24 * 4) { // 天
+				newTime = caculTime
+						+ TApplication.context.getString(R.string.hour);
+			} else if (caculTime >= 60 * 60 * 24
+					&& caculTime < 60 * 60 * 24 * 4) { // 天
 				caculTime /= 60 * 60 * 24;
-				newTime = caculTime + TApplication.context.getString(R.string.day);
+				newTime = caculTime
+						+ TApplication.context.getString(R.string.day);
 			} else {
 				SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm");
 				newTime = df.format(date);
@@ -434,7 +456,7 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 *
 	 * @param time
-	 *                需要计算的时间长度long格式
+	 *            需要计算的时间长度long格式
 	 * @return
 	 */
 	public static String caculateSoundTime(String time) {
@@ -442,7 +464,7 @@ public class StringUtil {
 			return "";
 		}
 		String timeLength = "";
-		if (Long.parseLong(time) / 1000 / 60>0) {
+		if (Long.parseLong(time) / 1000 / 60 > 0) {
 			timeLength += (Long.parseLong(time) / 1000 / 60) + "'";
 		}
 		timeLength += (Long.parseLong(time) / 1000 % 60) + "\"";
@@ -461,7 +483,7 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param date
-	 *                目标时间
+	 *            目标时间
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")
@@ -479,10 +501,12 @@ public class StringUtil {
 		// 当前星期
 		int weekPosition = 0;
 		// 星期
-		String[] weeks = TApplication.context.getResources().getStringArray(R.array.weeks);
+		String[] weeks = TApplication.context.getResources().getStringArray(
+				R.array.weeks);
 
 		try {
-			sourceDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
+			sourceDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+					.parse(date);
 
 			// 当前周在当年的第几周
 			calendar.setTime(currentDate);
@@ -524,9 +548,9 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param time
-	 *                原始时间啊， 格式 yyyy-MM-dd hh:mm:ss
+	 *            原始时间啊， 格式 yyyy-MM-dd hh:mm:ss
 	 * @param pattern
-	 *                新时间格式
+	 *            新时间格式
 	 * @return
 	 */
 	public static String formatTime(String time, String pattern) {
@@ -559,9 +583,9 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param time1
-	 *                时间1（格式 yyyy-MM-dd HH:mm:ss）
+	 *            时间1（格式 yyyy-MM-dd HH:mm:ss）
 	 * @param time2
-	 *                时间2（格式 yyyy-MM-dd HH:mm:ss）
+	 *            时间2（格式 yyyy-MM-dd HH:mm:ss）
 	 * @return 1(time1 > time2) 、 0(time1 == time2) 、 -1(除1，0的情况，都会返回-1)
 	 */
 	public static int compareTime(String time1, String time2) {
@@ -569,7 +593,8 @@ public class StringUtil {
 		Date date1;
 		try {
 			date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(time1);
-			Date date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(time2);
+			Date date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+					.parse(time2);
 			long timeMillis1 = date1.getTime();
 			long timeMillis2 = date2.getTime();
 
@@ -599,9 +624,9 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param timeMillis
-	 *                时间戳
+	 *            时间戳
 	 * @param pattern
-	 *                时间正则
+	 *            时间正则
 	 * @return 返回格式后的时间
 	 */
 	public static String formatTime(long timeMillis, String pattern) {
@@ -622,15 +647,16 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param time
-	 *                原时间
+	 *            原时间
 	 * @param fromPattern
-	 *                原始格式
+	 *            原始格式
 	 * @param toPattern
-	 *                目标格式
+	 *            目标格式
 	 * @return 格式化之后的
 	 */
 	@SuppressWarnings("deprecation")
-	public static String changeTimeFormat(String time, String fromPattern, String toPattern, boolean isMonth) {
+	public static String changeTimeFormat(String time, String fromPattern,
+			String toPattern, boolean isMonth) {
 
 		Date date = null;
 		SimpleDateFormat sdf = new SimpleDateFormat(toPattern);
@@ -688,9 +714,9 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param time
-	 *                时间
+	 *            时间
 	 * @param pattern
-	 *                格式
+	 *            格式
 	 * @return
 	 */
 	public static long getTimeMillis(String time, String pattern) {
@@ -717,9 +743,9 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 * 
 	 * @param time
-	 *                判断的字符串
+	 *            判断的字符串
 	 * @param fromPattern
-	 *                时间格式
+	 *            时间格式
 	 * @return 是返回true，不是返回false
 	 */
 	public static boolean valueTime(String time, String fromPattern) {
@@ -742,13 +768,12 @@ public class StringUtil {
 	 * @createAuthor XinGo
 	 * @updateAuthor
 	 * @param editTextInput
-	 *                要获取文本内容的edittext控件
+	 *            要获取文本内容的edittext控件
 	 * @updateInfo (修改内容描述)
 	 */
 	public static String trimEditTextInput(EditText editTextInput) {
 		return editTextInput.getText().toString().trim();
 	}
-
 
 	/**
 	 * 字符串转换整形,
@@ -761,7 +786,7 @@ public class StringUtil {
 	 * @updateInfo (此处输入修改内容,若无修改可不写.)
 	 *
 	 * @param str
-	 *                字符串
+	 *            字符串
 	 * @return 空返回0
 	 */
 	public static int StringToInt(String str) {
@@ -789,8 +814,10 @@ public class StringUtil {
 		// 获取mac地址：
 		String macAddress = "000000000000";
 		try {
-			WifiManager wifiMgr = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-			WifiInfo info = (null == wifiMgr ? null : wifiMgr.getConnectionInfo());
+			WifiManager wifiMgr = (WifiManager) context
+					.getSystemService(Context.WIFI_SERVICE);
+			WifiInfo info = (null == wifiMgr ? null : wifiMgr
+					.getConnectionInfo());
 			if (null != info) {
 				if (!TextUtils.isEmpty(info.getMacAddress()))
 					macAddress = info.getMacAddress().replace(":", "");
@@ -804,7 +831,7 @@ public class StringUtil {
 		}
 		return macAddress;
 	}
-	
+
 	/**
 	 * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
 	 * 
@@ -816,4 +843,84 @@ public class StringUtil {
 		final float scale = context.getResources().getDisplayMetrics().density;
 		return (int) (dpValue * scale + 0.5f);
 	}
+
+	/**
+	 * 扩音 打开 关闭
+	 * 
+	 * @author Robin
+	 * @Title: setSpeekModle
+	 * @Description: TODO
+	 * @param @param open 设定文件
+	 * @return void 返回类型
+	 * @throws
+	 * @date 2016年10月25日 上午9:50:30
+	 */
+	public static boolean setSpeekModle(Context context, boolean open) {
+		AudioManager audioManager = (AudioManager) context
+				.getSystemService(Context.AUDIO_SERVICE);
+		// audioManager.setMode(AudioManager.ROUTE_SPEAKER);
+		int currVolume = audioManager
+				.getStreamVolume(AudioManager.STREAM_VOICE_CALL);
+		audioManager.setMode(AudioManager.MODE_IN_CALL);
+
+		if (!audioManager.isSpeakerphoneOn() && true == open) {
+			audioManager.setSpeakerphoneOn(true);
+			audioManager
+					.setStreamVolume(
+							AudioManager.STREAM_VOICE_CALL,
+							audioManager
+									.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL),
+							AudioManager.STREAM_VOICE_CALL);
+			ToastUtil.showToast(context, "扩音打开");
+			open = false;
+		} else if (audioManager.isSpeakerphoneOn() && false == open) {
+			audioManager.setSpeakerphoneOn(false);
+			audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,
+					currVolume, AudioManager.STREAM_VOICE_CALL);
+			ToastUtil.showToast(context, "扩音关闭");
+			open = true;
+		}
+		return open;
+	}
+
+	/**
+	 * 从控件所在位置移动到控件的底部
+	 * 
+	 * @author Robin
+	 * @Title: moveToViewBottom
+	 * @Description: TODO
+	 * @param @return 设定文件
+	 * @return TranslateAnimation 返回类型
+	 * @throws
+	 * @date 2016年9月23日 下午5:55:21
+	 */
+	public static TranslateAnimation moveToViewBottom() {
+		TranslateAnimation mHiddenAction = new TranslateAnimation(
+				Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
+				0.0f, Animation.RELATIVE_TO_SELF, 0.0f,
+				Animation.RELATIVE_TO_SELF, 1.0f);
+		mHiddenAction.setDuration(200);
+		return mHiddenAction;
+	}
+
+	/**
+	 * 从控件的底部移动到控件所在位置
+	 * 
+	 * @author Robin
+	 * @Title: moveToViewLocation
+	 * @Description: TODO
+	 * @param @return 设定文件
+	 * @return TranslateAnimation 返回类型
+	 * @throws
+	 * @date 2016年9月23日 下午5:55:06
+	 */
+	public static TranslateAnimation moveToViewLocation() {
+		TranslateAnimation mHiddenAction = new TranslateAnimation(
+				Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
+				0.0f, Animation.RELATIVE_TO_SELF, 1.0f,
+				Animation.RELATIVE_TO_SELF, 0.0f);
+		mHiddenAction.setDuration(200);
+		return mHiddenAction;
+	}
+	
 }

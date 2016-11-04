@@ -90,15 +90,5 @@ public class ContentsDeteles extends BaseActivity implements OnClickListener{
 		}
 		
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

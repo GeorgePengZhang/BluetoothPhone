@@ -1,6 +1,7 @@
 package com.aura.bluetoothphone.activity;
 
 import android.app.AlertDialog;
+import android.view.MotionEvent;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -49,7 +50,7 @@ public class SplashActivity extends BaseActivity {
 	protected void initGetData() {
 
 		AlphaAnimation anima = new AlphaAnimation(0.3f, 1.0f);
-		anima.setDuration(2000);// 设置动画显示时间
+		anima.setDuration(2000);// 设置动画显示时间 
 		sple_id.startAnimation(anima);
 		anima.setAnimationListener(new AnimationImpl());
 		
@@ -89,5 +90,5 @@ public class SplashActivity extends BaseActivity {
 		IntentUtil.gotoActivity(SplashActivity.this, MainActivity.class);
 		finish();
 	}
-
+	
 }

@@ -17,6 +17,8 @@ import android.widget.RelativeLayout;
 
 import com.aura.bluetoothphone.R;
 import com.aura.bluetoothphone.activity.MyPrivateActivity;
+import com.aura.bluetoothphone.activity.RecorderActivity;
+import com.aura.bluetoothphone.activity.SoundActivity;
 import com.aura.bluetoothphone.utils.DialogUtil;
 import com.aura.bluetoothphone.utils.IntentUtil;
 import com.aura.bluetoothphone.utils.PhotoUtil;
@@ -34,6 +36,7 @@ import com.aura.bluetoothphone.widget.CustomDialog;
  * @Upauthor：Administrator #Update：2016-07-14 15:36
  * @tags：
  */
+@SuppressWarnings("unused")
 public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     /** 头像 */
@@ -41,8 +44,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     /** 设备管理 */
     private RelativeLayout blue_device;
+    /** 铃声管理 */
+    private RelativeLayout bule_sounds ;
     /** 帮助 */
     private RelativeLayout blue_about;
+    /** 录音 */
+	private RelativeLayout bule_recording ;
     /** 关于 */
     private RelativeLayout blue_help;
     /** 退出 */
@@ -70,9 +77,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         head_imageView  = (CircleImageView) findViewById(R.id.xqb_head_imageView);
 
         blue_device 	= (RelativeLayout) findViewById(R.id.blue_device);
+        bule_sounds		= (RelativeLayout) findViewById(R.id.bule_sounds);
         blue_help 		= (RelativeLayout) findViewById(R.id.bule_help);
         blue_about 		= (RelativeLayout) findViewById(R.id.blue_about);
         rat_freeze_exit = (RelativeLayout) findViewById(R.id.exit_layout);
+        bule_recording  = (RelativeLayout) findViewById(R.id.bule_recording);
     }
 
     @Override
@@ -94,6 +103,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         blue_help.setOnClickListener(this);
         blue_about.setOnClickListener(this);
         rat_freeze_exit.setOnClickListener(this);
+        bule_recording.setOnClickListener(this);
+        bule_sounds.setOnClickListener(this);
     }
 
     @Override
@@ -116,10 +127,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 IntentUtil.gotoActivity(context, MyPrivateActivity.class);
 //            	IntentUtil.gotoActivity(context, BuleAcyiivty.class);
                 break;
+            case R.id.bule_sounds:
+            	IntentUtil.gotoActivity(context, SoundActivity.class);
+            	break ;
             case R.id.bule_help: // 帮助
             	ToastUtil.showToast(getActivity(), "dsadsa");
                 break;
-            case R.id.blue_about: // g关于
+            case R.id.bule_recording: // 录音
+            	IntentUtil.gotoActivity(context, RecorderActivity.class);
+                break;
+            case R.id.blue_about: // 关于
             	ToastUtil.showToast(getActivity(), "dsadsa");
               break;
             case R.id.exit_layout: // 退出

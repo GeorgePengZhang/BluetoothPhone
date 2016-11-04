@@ -34,7 +34,8 @@ import com.aura.bluetoothphone.R;
 import com.aura.bluetoothphone.adapter.ContactsPhoneAdapter;
 import com.aura.bluetoothphone.bean.ContactsPhoneBean;
 import com.aura.bluetoothphone.fragment.BaseFragment;
-import com.aura.bluetoothphone.utils.ToastUtil;
+import com.aura.bluetoothphone.utils.IntentUtil;
+import com.aura.bluetoothphone.utils.StringUtil;
 import com.aura.bluetoothphone.utils.connects.CnToCharParser;
 import com.aura.bluetoothphone.utils.connects.ContactsUtils;
 import com.aura.bluetoothphone.view.HomeEditTextWithDel;
@@ -154,6 +155,9 @@ public class KeyboardDial extends BaseFragment implements OnClickListener {
 		btn_eight.setSoundEffectsEnabled(false);
 		btn_nine.setSoundEffectsEnabled(false);
 		btn_zero.setSoundEffectsEnabled(false);
+		btn_jing.setSoundEffectsEnabled(false);
+		btn_star.setSoundEffectsEnabled(false);
+		
 		listView.setVisibility(View.GONE);
 		edit_phone.addTextChangedListener(new TextWatcher() {
 			
@@ -377,27 +381,27 @@ public class KeyboardDial extends BaseFragment implements OnClickListener {
 			playTone(ToneGenerator.TONE_DTMF_P);
 			setEditText("#") ;
 			break;
-		case R.id.btn_call:
-			ToastUtil.showLongToast(getActivity(), "电话未拨通！");
+		case R.id.btn_call:				// 跳转 通话界面
 			
+			IntentUtil.gotoActivity(getActivity(), CallingActivity.class);
 			
 			
 			break;
 		case R.id.btn_invision:			//隐藏键盘
-			mView.setAnimation(moveToViewBottom());
+			mView.setAnimation(StringUtil.moveToViewBottom());
 			mView.setVisibility(View.GONE);
 			
-			view3.setAnimation(moveToViewLocation());
+			view3.setAnimation(StringUtil.moveToViewLocation());
 			view3.setVisibility(View.VISIBLE);
 			
 			break ;
 		case R.id.btn_show:				//显示键盘
-			mView.setAnimation(moveToViewLocation());
+			mView.setAnimation(StringUtil.moveToViewLocation());
 		    mView.setVisibility(View.VISIBLE);
 		    
-		    view3.setAnimation(moveToViewBottom());
+		    view3.setAnimation(StringUtil.moveToViewBottom());
 			view3.setVisibility(View.GONE);
-			moveToViewLocation() ;
+			StringUtil.moveToViewLocation() ;
 			break;
 		default:
 			break;
@@ -444,40 +448,6 @@ public class KeyboardDial extends BaseFragment implements OnClickListener {
 		edit_phone.setText(builder.toString());
 	}
 	
-    /**
-     * 从控件所在位置移动到控件的底部
-     * @author Robin
-     * @Title: moveToViewBottom 
-     * @Description: TODO
-     * @param @return    设定文件 
-     * @return TranslateAnimation    返回类型 
-     * @throws 
-     * @date 2016年9月23日 下午5:55:21
-     */
-    public  TranslateAnimation moveToViewBottom() {
-        TranslateAnimation mHiddenAction = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
-                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
-                0.0f, Animation.RELATIVE_TO_SELF, 1.0f);
-        mHiddenAction.setDuration(200);
-        return mHiddenAction;
-    }
- 
-    /**
-     * 从控件的底部移动到控件所在位置
-     * @author Robin
-     * @Title: moveToViewLocation 
-     * @Description: TODO
-     * @param @return    设定文件 
-     * @return TranslateAnimation    返回类型 
-     * @throws 
-     * @date 2016年9月23日 下午5:55:06
-     */
-    public  TranslateAnimation moveToViewLocation() {
-        TranslateAnimation mHiddenAction = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
-                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
-                1.0f, Animation.RELATIVE_TO_SELF, 0.0f);
-        mHiddenAction.setDuration(200);
-        return mHiddenAction;
-    }
+    
 
 }

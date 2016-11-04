@@ -226,16 +226,18 @@ public class DialogUtil {
 	 * @param context
 	 * @param data
 	 */
-	public static void showWf(final Context context,final String data) {
+	public static void showDelete(final Context context,final String data) {
 		CustomDialog dialog = new CustomDialog(context);
 		dialog.setTitle(context.getString(R.string.prompt));
 		dialog.setMessage(data);
 		dialog.setButton1("取消", "确定");
 		dialog.setEnterBtn(new CustomDialog.OnClickListener() {
-
+			
 			@Override
 			public void onClick(CustomDialog dialog, int id, Object object) {
 				dialog.dismiss();
+				
+				
 
 			}
 		});

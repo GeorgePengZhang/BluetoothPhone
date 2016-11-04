@@ -1,21 +1,22 @@
 package com.aura.bluetoothphone.activity;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import android.annotation.TargetApi;
+import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
+import android.bluetooth.BluetoothHeadset;
+import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -73,31 +74,15 @@ public class MyPrivateActivity extends BaseActivity implements
 
 	@Override
 	protected void init() {
+
 		titleView.setListener(this);
 		list_bonded_devices.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				final int prot = position;
-				DialogUtil.showMessageDg(MyPrivateActivity.this,
-						getString(R.string.prompt),
-						getString(R.string.auth_process_no_blue),
-						new CustomDialog.OnClickListener() {
-							@Override
-							public void onClick(CustomDialog dialog, int id,
-									Object object) {
-								BluetoothDevice device = bondedDevicesList.get(prot) ;
-								unpairDevice(device) ;
-								dialog.dismiss();
-							}
-						});
-				//				try {
-				//					// 连接
-				//					// connect(device);
-				//				} catch (Exception e) {
-				//					e.printStackTrace();
-				//				}
+				BluetoothDevice device = bondedDevicesList.get(position) ;
+				showSelectImageDg(context,device);
 			}
 		});
 
@@ -171,7 +156,18 @@ public class MyPrivateActivity extends BaseActivity implements
 					}
 				});
 	}
+	
 
+  	/**
+  	 * 取消配对
+  	 * @author Robin
+  	 * @Title: unpairDevice 
+  	 * @Description: TODO
+  	 * @param @param device    设定文件 
+  	 * @return void    返回类型 
+  	 * @throws 
+  	 * @date 2016年10月18日 上午9:30:25
+  	 */
 	private void unpairDevice(BluetoothDevice device) {
 		try {
 			Method m = device.getClass()
@@ -335,36 +331,101 @@ public class MyPrivateActivity extends BaseActivity implements
 					case BluetoothDevice.BOND_BONDED: 					// 12
 						ToastUtil.showToast(MyPrivateActivity.this, "完成配对：" + device.getName());
 						getBondedDevices();
-						try {
-							// 连接
-							connect(device);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+//						try {
+//							// 连接
+//							connect(device);
+//						} catch (Exception e) {
+//							e.printStackTrace();
+//						}
 						break;
 					}
 				}
 			}
 		}
 	};
-
+	 BluetoothDevice device ;  
 	// 蓝牙设备的连接（客户端）
-	private void connect(BluetoothDevice device) {
-		// 固定的UUID
-		final String SPP_UUID = "00001101-0000-1000-8000-00805F9B34FB";
-		UUID uuid = UUID.fromString(SPP_UUID);
-		try {
-			BluetoothSocket socket = device
-					.createRfcommSocketToServiceRecord(uuid);
-			socket.connect();
-			// OutputStream outputStream = socket.getOutputStream();
-			// InputStream inputStream = socket.getInputStream();
-			// outputStream.write("StartOnNet\n".getBytes());
-			// outputStream.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
+	private void connect(BluetoothDevice devices) {
+		// 如果正在搜索，就先取消搜索
+		if (!adapter.isDiscovering()) {
+			adapter.cancelDiscovery();
 		}
+//		new Thread(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				// 固定的UUID
+//				final String SPP_UUID = "00001101-0000-1000-8000-00805F9B34FB";
+//				UUID uuid = UUID.fromString(SPP_UUID);
+//				try {  
+//					BluetoothSocket socket = device
+//							.createRfcommSocketToServiceRecord(uuid);
+//					socket.connect();
+//					// OutputStream outputStream = socket.getOutputStream();
+//					// InputStream inputStream = socket.getInputStream();
+//					// outputStream.write("StartOnNet\n".getBytes());
+//					// outputStream.flush();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}).start();
+		device = devices ;
+		adapter = BluetoothAdapter.getDefaultAdapter();
+		adapter.getProfileProxy(MyPrivateActivity.this, mProfileServiceListener, BluetoothProfile.A2DP);
+		
+		
 	}
+    BluetoothHeadset bh ;
+    BluetoothA2dp mBTA2DP;
+    
+	private BluetoothProfile.ServiceListener mProfileServiceListener = new BluetoothProfile.ServiceListener() {
+
+		@Override
+		public void onServiceConnected(int profile, BluetoothProfile proxy) {
+			 
+			 
+			 Log.i("log", "onServiceConnected");
+	            try {
+	                if (profile == BluetoothProfile.HEADSET) {
+	                    bh = (BluetoothHeadset) proxy;
+	                    if (bh.getConnectionState(device) != BluetoothProfile.STATE_CONNECTED){
+	                        bh.getClass()
+	                                .getMethod("connect", BluetoothDevice.class)
+	                                .invoke(bh, device);
+	                    }
+	                } else if (profile == BluetoothProfile.A2DP) {
+	                	mBTA2DP = (BluetoothA2dp)proxy;
+//	                	BluetoothHeadsetClient mclient=(BluetoothHeadsetClient)proxy;
+//	                    if (mBTA2DP.getConnectionState(device) != BluetoothProfile.STATE_CONNECTED){
+//	                    	mBTA2DP.getClass()
+//	                                .getMethod("connect", BluetoothDevice.class)
+//	                                .invoke(mBTA2DP, device);
+//	                    }
+	                    Method m = mBTA2DP.getClass().getDeclaredMethod("connect",BluetoothDevice.class);    
+	                    m.setAccessible(true);  
+	                    //连接Headset  
+	                    boolean successHeadset = (Boolean)m.invoke(mBTA2DP, device);  
+	                    if (successHeadset) {
+	                    	ToastUtil.showToast(MyPrivateActivity.this, "连接成功！！！！");
+						} else {
+							ToastUtil.showToast(MyPrivateActivity.this, "连接失败！！！！");
+						}
+	                }
+	                if (bh != null && mBTA2DP != null) {
+//	                    new A2dpConnectionThread(context, device, mBTA2DP, bh).start();
+	                	
+	                	
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+		}
+
+		@Override
+		public void onServiceDisconnected(int profile) {
+			
+		}};
 
 	// 为listview动态设置高度（有多少条目就显示多少条目）
 	private void setListViewHeight(int count) {
@@ -403,6 +464,56 @@ public class MyPrivateActivity extends BaseActivity implements
 	@Override
 	public void RighOnClick() {
 		getBondedDevices();
+	}
+	
+	/**
+     * 显示选择图片的对话框
+     * 
+     * @author Robin
+     * @Title: showSelectImageDg 
+     * @Description: TODO
+     * @param @param context    设定文件 
+     * @return void    返回类型 
+     * @throws 
+     * @date 2016年10月9日 上午11:01:49 
+     */
+	public void showSelectImageDg(final Context context,final BluetoothDevice device) {
+
+		String[] items = context.getResources().getStringArray(R.array.select_blue);
+
+		CustomDialog dialog = new CustomDialog(context);
+		dialog.setTitle(context.getString(R.string.dialog_select_blue));
+		dialog.setCancelable(true);
+		dialog.setCanceledOnTouchOutside(true);
+
+		dialog.setSingleSelectItems(items, new CustomDialog.OnClickListener() {
+
+			@Override
+			public void onClick(CustomDialog dialog, int id, Object object) {
+				switch (id) {
+				case 0:
+					// 取消配对
+					unpairDevice(device) ;
+					break;
+				case 1:
+					// 连接蓝牙
+					try {
+						// 连接
+						 connect(device);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+
+				default:
+					break;
+				}
+				dialog.dismiss();
+			}
+		});
+
+		dialog.show();
+
 	}
 
 }

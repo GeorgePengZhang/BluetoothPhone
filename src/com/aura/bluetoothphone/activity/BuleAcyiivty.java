@@ -1,12 +1,14 @@
 package com.aura.bluetoothphone.activity;
 
 import java.util.ArrayList;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,13 +18,13 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.aura.bluetoothphone.R;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
@@ -58,13 +60,12 @@ public class BuleAcyiivty extends ListActivity {
                 (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
 
-        
         if (mBluetoothAdapter == null) {
             Toast.makeText(this, "error_bluetooth_not_supported", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
-
+        
 	}
 
 
@@ -73,7 +74,7 @@ public class BuleAcyiivty extends ListActivity {
 		super.onResume();
 
 		//进行蓝牙连接的判断
-		// Ensures Bluetooth is enabled on the device. If Bluetooth is not
+		// Ensures Bluetooth is enabled on the device. If Bluetooth is not  
 
 		Log.i(TAG, "connect_ble");
 		if (!mBluetoothAdapter.isEnabled()) {
@@ -84,6 +85,7 @@ public class BuleAcyiivty extends ListActivity {
 			}
 		}
 
+		
 		// Initializes list view adapter.
 		mLeDeviceListAdapter = new LeDeviceListAdapter();
 		setListAdapter(mLeDeviceListAdapter);

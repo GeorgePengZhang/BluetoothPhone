@@ -13,6 +13,7 @@ import com.aura.bluetoothphone.R;
 import com.aura.bluetoothphone.fragment.CallsLogListFragment;
 import com.aura.bluetoothphone.fragment.ContactsPhoneListFragment;
 import com.aura.bluetoothphone.fragment.MineFragment;
+import com.aura.bluetoothphone.service.PhoneService;
 import com.aura.bluetoothphone.utils.ToastUtil;
 import com.aura.bluetoothphone.view.MyRadioView;
 
@@ -61,6 +62,9 @@ public class MainActivity extends BaseFragmentActivity {
 	
 	private String keyView;
 	private MyRadioView myRadioView ;
+	
+	private Intent mPhoneService ;
+	
 	@Override
 	protected int getContentViewId() {
 		return R.layout.activity_main;
@@ -86,6 +90,9 @@ public class MainActivity extends BaseFragmentActivity {
 		list_Fragments.add(fragment_mine) ; 
 		switchView(FRAGMENT_CONNECTS);
 		radio_contects.setCheck(true);
+		
+		mPhoneService = new Intent(MainActivity.this, PhoneService.class) ;
+		startService(mPhoneService) ;
 	}
 	
 //	@Override
@@ -94,7 +101,14 @@ public class MainActivity extends BaseFragmentActivity {
 //		super.onResume();
 //	}
 
-
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (mPhoneService != null ) {
+			stopService(mPhoneService) ;
+		}
+	}
+	
 	@Override
 	protected void widgetListener() {
 		radio_contects.setOnClickListener(radioClick);

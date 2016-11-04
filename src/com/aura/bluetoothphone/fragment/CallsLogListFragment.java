@@ -69,7 +69,7 @@ public class CallsLogListFragment extends BaseFragment {
         titleView.setRightBtn("清空", new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				DialogUtil.showWf(context , "Delete all call records");
+				DialogUtil.showDelete(context , "Delete all call records");
 			}
 		});
 	}
@@ -98,9 +98,12 @@ public class CallsLogListFragment extends BaseFragment {
 						mDataList.add(bean);
 					}
 					
-					cursor.close();
-					callsLogAdapter = new CallsLogAdapter(getActivity(), mDataList);
-					mListView.setAdapter(callsLogAdapter);
+					cursor.close();		
+					
+					// 以下是测试需要  暂时 注释掉
+					
+//					callsLogAdapter = new CallsLogAdapter(getActivity(), mDataList);
+//					mListView.setAdapter(callsLogAdapter);
 				}
 			}
 		}
