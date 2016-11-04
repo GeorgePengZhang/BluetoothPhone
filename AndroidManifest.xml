@@ -13,16 +13,41 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
-    
-    
-    <uses-permission android:name="ANDROID.PERMISSION.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>   
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"></uses-permission>  
+	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> 
+	
+	<!-- 在SDCard中创建与删除文件权限 -->
+	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+	<!-- 往SDCard写入数据权限 -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+	<!-- 访问internet权限 -->
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+	
+    <!-- Android 6.0 以上版本 权限问题 必须添加此权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+     <uses-permission android:name="android.permission.VIBRATE" />  
+     
+    <!-- 接电话的权限 -->
+    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
+    <!-- 解锁的权限 -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <!-- 亮屏的权限 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 读取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR"/>
+    <uses-permission android:name="android.permission.STATUS_BAR"/>
+     
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/logo" 
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -65,16 +90,41 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
          
-                  <!-- 联系人详情-->
+         <!-- 联系人详情-->
          <activity
             android:name="com.aura.bluetoothphone.activity.ClipPictureActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
          
+         <!-- 通话界面-->
+         <activity
+            android:name="com.aura.bluetoothphone.activity.CallingActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+         
+         <!-- 通话 联系人 界面-->
+         <activity
+            android:name="com.aura.bluetoothphone.activity.CallingContactActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+         
+         <!-- 通话录音文件类 -->
+         <activity
+            android:name="com.aura.bluetoothphone.activity.RecorderActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+         
+         <!-- 铃声管理类 -->
+         <activity
+            android:name="com.aura.bluetoothphone.activity.SoundActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
          
         <service android:name="com.aura.bluetoothphone.service.ContactsSyncService" >
         </service>
-
+        
+		<service android:name="com.aura.bluetoothphone.service.PhoneService" >
+        </service>
     </application>
 
 </manifest>
